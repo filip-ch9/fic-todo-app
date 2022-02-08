@@ -1,7 +1,6 @@
 package com.fic.todo.app.helper;
 
-import com.fic.todo.app.dto.AdminDto;
-import com.fic.todo.app.service.AdminService;
+import com.fic.todo.app.dto.AdminDTO;
 import com.fic.todo.app.model.Admin;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -12,19 +11,17 @@ import java.util.stream.Collectors;
 @Component
 public class AdminMapper {
 
-  @Autowired private AdminService adminService;
-
-  public Admin convertFromDto(Admin adminDto) {
+  public Admin convertFromDto(AdminDTO adminDto) {
     return new Admin(adminDto.getEmail(), adminDto.getUsername(),
         adminDto.getPassword(), adminDto.getConfirmPassword());
   }
 
-  public AdminDto convertToDto(Admin admin) {
-    return new AdminDto(admin.getId(), admin.getEmail(), admin.getUsername(),
+  public AdminDTO convertToDto(Admin admin) {
+    return new AdminDTO(admin.getId(), admin.getEmail(), admin.getUsername(),
         admin.getPassword(), admin.getConfirmPassword());
   }
 
-  public List<AdminDto> convertListToDto(List<Admin> adminList) {
+  public List<AdminDTO> convertListToDto(List<Admin> adminList) {
     return adminList.stream().map(this::convertToDto).collect(Collectors.toList());
   }
 

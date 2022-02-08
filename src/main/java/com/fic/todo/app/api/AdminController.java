@@ -1,6 +1,6 @@
 package com.fic.todo.app.api;
 
-import com.fic.todo.app.dto.AdminDto;
+import com.fic.todo.app.dto.AdminDTO;
 import com.fic.todo.app.helper.AdminMapper;
 import com.fic.todo.app.service.AdminService;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -18,28 +18,28 @@ public class AdminController {
   @Autowired private AdminMapper adminMapper;
 
   @GetMapping()
-  public List<AdminDto> getAllAdminUsers() {
+  public List<AdminDTO> getAllAdminUsers() {
     return adminMapper.convertListToDto(adminService.getAllAdminUsers());
   }
 
   @GetMapping("/{id}")
-  public AdminDto getAdmin(@PathVariable("id") Long id) {
+  public AdminDTO getAdmin(@PathVariable("id") Long id) {
     return adminMapper.convertToDto(adminService.getAdmin(id));
   }
 
   @PostMapping()
-  public AdminDto createAdmin(@RequestBody AdminDto adminDto) {
+  public AdminDTO createAdmin(@RequestBody AdminDTO adminDto) {
     return adminMapper.convertToDto(adminService.createAdminUser(adminDto));
   }
 
   @PutMapping()
-  public AdminDto updateAdmin(@RequestBody AdminDto adminDto) {
+  public AdminDTO updateAdmin(@RequestBody AdminDTO adminDto) {
     return adminMapper.convertToDto(adminService.updateAdminUser(adminDto));
   }
 
   @DeleteMapping("{id}")
-  public void deleteAdmin(@PathVariable("id") Long id) {
-    adminService.deleteAdminUser(id);
+  public boolean deleteAdmin(@PathVariable("id") Long id) {
+    return adminService.deleteAdminUser(id);
   }
 
 }
