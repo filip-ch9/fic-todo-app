@@ -42,8 +42,8 @@ public class TodoService {
     return todoList;
   }
 
-  public Todo updateOneTodo(TodoDTO todoDTO) {
-    Todo todo = todoRepository.findById(todoDTO.getId()).orElseThrow(() -> new TodoAppException("Todo does not exists! Id: " + todoDTO.getId()));
+  public Todo updateOneTodo(Long id, TodoDTO todoDTO) {
+    Todo todo = todoRepository.findById(id).orElseThrow(() -> new TodoAppException("Todo does not exists! Id: " + id));
     todo.setDescription(todoDTO.getDescription());
     todo.setDateOfEntry(todoDTO.getDateOfEntry());
     todo.setTodoCategory(todoDTO.getTodoCategory());

@@ -29,14 +29,14 @@ public class AdminService {
     return adminRepository.findById(id).orElseThrow(() -> new TodoAppException("Admin does not exist! Id: " + id));
   }
 
-  public Admin updateAdminUser(AdminDTO adminDto) {
-    Admin admin = adminRepository.findById(adminDto.getId())
-        .orElseThrow(() -> new TodoAppException("Admin does not exist! Id: " + adminDto.getId()));
-    admin.setId(adminDto.getId());
-    admin.setEmail(adminDto.getEmail());
-    admin.setUsername(adminDto.getUsername());
-    admin.setPassword(adminDto.getPassword());
-    admin.setConfirmPassword(adminDto.getConfirmPassword());
+  public Admin updateAdminUser(Long id, AdminDTO adminDTO) {
+    Admin admin = adminRepository.findById(id)
+        .orElseThrow(() -> new TodoAppException("Admin does not exist! Id: " + id));
+    admin.setId(adminDTO.getId());
+    admin.setEmail(adminDTO.getEmail());
+    admin.setUsername(adminDTO.getUsername());
+    admin.setPassword(adminDTO.getPassword());
+    admin.setConfirmPassword(adminDTO.getConfirmPassword());
     return adminRepository.save(admin);
   }
 

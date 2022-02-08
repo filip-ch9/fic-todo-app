@@ -12,7 +12,7 @@
 
 	<groupId>com.fic.todo.app</groupId>
 	<artifactId>fic-todo-app</artifactId>
-	<version>1.0.1-SNAPSHOT</version>
+	<version>1.0.2-SNAPSHOT</version>
 
 	<name>fic-todo-app</name>
 	<description>manage daily todos and tasks</description>

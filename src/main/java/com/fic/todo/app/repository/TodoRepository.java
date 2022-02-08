@@ -11,4 +11,5 @@ import java.util.List;
 public interface TodoRepository extends JpaRepository<Todo, Long> {
 
   List<Todo> findAllByUser(User user);
+  void deleteAllByUser(User user);
 }

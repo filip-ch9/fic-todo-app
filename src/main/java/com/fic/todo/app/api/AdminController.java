@@ -32,9 +32,9 @@ public class AdminController {
     return adminMapper.convertToDto(adminService.createAdminUser(adminDto));
   }
 
-  @PutMapping()
-  public AdminDTO updateAdmin(@RequestBody AdminDTO adminDto) {
-    return adminMapper.convertToDto(adminService.updateAdminUser(adminDto));
+  @PutMapping("/{id}")
+  public AdminDTO updateAdmin(@PathVariable("id") Long id, @RequestBody AdminDTO adminDTO) {
+    return adminMapper.convertToDto(adminService.updateAdminUser(id, adminDTO));
   }
 
   @DeleteMapping("{id}")

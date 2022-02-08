@@ -5,6 +5,7 @@ import com.fic.todo.app.exceptions.TodoAppException;
 import com.fic.todo.app.helper.TodoMapper;
 import com.fic.todo.app.helper.UserMapper;
 import com.fic.todo.app.model.User;
+import com.fic.todo.app.repository.TodoRepository;
 import com.fic.todo.app.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,6 +16,7 @@ import java.util.List;
 public class UserService {
 
   @Autowired private UserRepository userRepository;
+  @Autowired private TodoRepository todoRepository;
 
   @Autowired private UserMapper userMapper;
   @Autowired private TodoMapper todoMapper;
@@ -31,8 +33,8 @@ public class UserService {
     return userRepository.save(userMapper.convertFromDto(userDTO));
   }
 
-  public User updateUser(UserDTO userDTO) {
-    User user = userRepository.findByUsername(userDTO.getUsername()).orElseThrow(() -> new TodoAppException("User does not exists! Username:" + userDTO.getUsername()));
+  public User updateUser(Long id, UserDTO userDTO) {
+    User user = userRepository.findById(id).orElseThrow(() -> new TodoAppException("User does not exists! Username:" + id));
     user.setPassword(userDTO.getPassword());
     user.setConfirmPassword(userDTO.getConfirmPassword());
     user.setTodos(todoMapper.convertListFromTodoDto(userDTO.getTodoDTOList()));
@@ -40,6 +42,8 @@ public class UserService {
   }
 
   public boolean deleteUser(Long id) {
+    User user = userRepository.findById(id).orElseThrow(() -> new TodoAppException("User does not exists! Id: " + id));
+    todoRepository.deleteAllByUser(user);
     userRepository.deleteById(id);
     return !userRepository.existsById(id);
   }
